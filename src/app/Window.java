@@ -1,5 +1,6 @@
+package app;
+
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -23,6 +24,9 @@ public class Window {
     }
 
     private void loadInterface(){
+        
+        Color backgroundColor = new Color(176,141,87);
+        Color textColor = new Color(20, 20, 50);
 
         Board board = new Board();
         board.generateTerrain();
@@ -32,7 +36,7 @@ public class Window {
 
         parameters.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         parameters.setPreferredSize(new Dimension(430, 900));
-        parameters.setBackground(new Color(176,141,87));
+        parameters.setBackground(backgroundColor);
         parameters.setLayout(new GridLayout(8, 1, 5, 15));
 
 
@@ -42,8 +46,8 @@ public class Window {
 
         seed.setFont(new Font("Serif", Font.ITALIC, 28));
         seed.setHorizontalAlignment(SwingConstants.CENTER);
-        seed.setForeground(new Color(20, 20, 50));
-        seed.setBackground(new Color(176,141,87));
+        seed.setForeground(textColor);
+        seed.setBackground(backgroundColor);
 
         seed.addActionListener(new ActionListener() {
             @Override
@@ -59,45 +63,48 @@ public class Window {
 
 
 
-        JSlider DetailLvl = new JSlider();
+        JSlider DetailsStrengh = new JSlider();
 
-        DetailLvl.setMinimum(5);
-        DetailLvl.setMaximum(15);
-        DetailLvl.setValue(10);
+        DetailsStrengh.setMinimum(-30);
+        DetailsStrengh.setMaximum(30);
+        DetailsStrengh.setValue(10);
 
-        DetailLvl.addChangeListener(e -> {
-            board.setDetailsLvl(DetailLvl.getValue());
+        DetailsStrengh.addChangeListener(e -> {
+            board.setDetailsStrengh(DetailsStrengh.getValue());
             board.generateTerrain();
             board.repaint();
         });
 
-        DetailLvl.addMouseWheelListener(e -> {
+        DetailsStrengh.addMouseWheelListener(e -> {
             int notches = e.getWheelRotation();
-            int currentValue = DetailLvl.getValue();
+            int currentValue = DetailsStrengh.getValue();
             int newValue = currentValue - notches; // Adjust slider value based on scroll direction
 
             // Ensure the new value stays within the slider's bounds
-            if (newValue < DetailLvl.getMinimum()) {
-                newValue = DetailLvl.getMinimum();
-            } else if (newValue > DetailLvl.getMaximum()) {
-                newValue = DetailLvl.getMaximum();
+            if (newValue < DetailsStrengh.getMinimum()) {
+                newValue = DetailsStrengh.getMinimum();
+            } else if (newValue > DetailsStrengh.getMaximum()) {
+                newValue = DetailsStrengh.getMaximum();
             }
-            DetailLvl.setValue(newValue);
+            DetailsStrengh.setValue(newValue);
 
-            board.setDetailsLvl(newValue);
+            board.setDetailsStrengh(newValue);
 
             board.generateTerrain();
             board.repaint();
 
         });
+        
+        DetailsStrengh.setBackground(backgroundColor);
 
-        parameters.add(DetailLvl);
+        parameters.add(DetailsStrengh);
 
 
-        MapsForceUI MPFUI = new MapsForceUI();
+//        MapsForceUI MPFUI = new MapsForceUI();
+//
+//        parameters.add(MPFUI);
 
-        MPFUI.setBaseNoise(board.getFinalNoise());
-        parameters.add(MPFUI);
+
 
 
 
@@ -115,6 +122,14 @@ public class Window {
         nodeEditorUI.setRampUI(rampUI);
         nodeEditorUI.setBoard(board);
 
+        BrushSelectorUI brushSelection = new BrushSelectorUI();
+
+        parameters.add(brushSelection);
+
+
+        BrushParametersUI brushesUI = new BrushParametersUI();
+
+        parameters.add(brushesUI);
 
         parameters.revalidate();
         parameters.repaint();

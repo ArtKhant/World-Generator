@@ -1,3 +1,5 @@
+package app;
+
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -297,7 +299,6 @@ public class NodeEditorUI extends JComponent {
                     updateScreen();
                 } //brightness
 
-                //TODO color wheel color choose
                 else if((x-70) * (x-70) + (y-52) * (y-52) < 2500){
 
                     double angle;

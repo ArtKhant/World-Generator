@@ -1,3 +1,5 @@
+package app;
+
 import java.awt.*;
 
 public class ColorNode {

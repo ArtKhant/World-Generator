@@ -1,3 +1,5 @@
+package generator;
+
 public class StringToSeed {
     public StringToSeed(){
 
