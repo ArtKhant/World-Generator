@@ -21,14 +21,18 @@ public class Board extends JComponent {
     private Graphics2D g2d;
 
     private short[][] FinalNoise;
+    private short[][] BackedLayer;
 
+    double[] matrixStrength;
+
+    private List<short[][]> noiseLayers = new ArrayList<>();
 
     private int force = 10;
 
 
-    private int x = 1400;
-    private int y = 900;
-    private int bevel = 900;
+    private int x = 1000;
+    private int y = 800;
+    private int bevel = 800;
 
     private colorRamp ramp = null;
     private String seed = "Seed";
@@ -62,7 +66,7 @@ public class Board extends JComponent {
 
                 g2d.setColor(ramp.getColor(h));
 
-                g2d.fillRect(i*1, j*1, 1, 1);
+                g2d.fillRect(i*1, j*1, 2, 2);
             }
         }
 
@@ -93,10 +97,10 @@ public class Board extends JComponent {
 
 
         int[] matrixStep = new int[totalLayers];
-        double[] matrixStrength = new double[totalLayers];
+        matrixStrength = new double[totalLayers];
 
         List<float[][][]> vectorMaps = new ArrayList<>();
-
+        noiseLayers = new ArrayList<>();
         long before = System.nanoTime();
 
         for(int i = step/2, amountOfLayers = 0; i > 2 && amountOfLayers < totalLayers; i--){
@@ -104,7 +108,7 @@ public class Board extends JComponent {
             if(step % i == 0) {
 
                 matrixStep[amountOfLayers] = i;
-                matrixStrength[amountOfLayers] = 1/(step/i / 1d) / 5 * force;
+                matrixStrength[amountOfLayers] = 1/(step/i / 1d) / 5;
                 vectorMaps.add(PNG.generateVectorMap(x, y, i));
                 amountOfLayers ++;
 
@@ -143,37 +147,25 @@ public class Board extends JComponent {
         }
 
         System.out.println("Time on noise maps milliseconds ~ " + (System.nanoTime() - before)/1000000f);
-
+        Runtime.getRuntime().gc();
         before = System.nanoTime();
 
         short[][] currentMap = map; // Start with base map
         for (int l = 0; l < totalLayers; l++) {
-
-            currentMap = PNG.addMap(currentMap, allLayers.get(l), matrixStrength[l]);
+            noiseLayers.add(l, allLayers.get(l));
+            currentMap = PNG.addMap(currentMap, allLayers.get(l), matrixStrength[l] * force);
         }
         map = currentMap;
         System.out.println("Time on sum maps milliseconds ~ " + (System.nanoTime() - before)/1000000f);
-
-
-//        for(int i = step/2, amountOfLayers = 0; i > 2 && amountOfLayers < depth; i--){
-//
-//            if(step % i == 0) {
-//
-//                map = PNG.addMap(map, PNG.generateNoiseMap(x, y, i, PNG.generateVectorMap(x, y, i)), (double) (1/(step/i / 1f) / 5 * force));
-//                amountOfLayers ++;
-//
-//            }
-//
-//        }
 
         allLayers.clear();
         allLayers = null; // Remove reference
         vectorMaps.clear();
         vectorMaps = null;
         matrixStep = null;
-        matrixStrength = null;
 
-        Runtime.getRuntime().gc();
+
+
 
         return map;
     }
@@ -184,6 +176,8 @@ public class Board extends JComponent {
         long before = System.nanoTime();
 
         FinalNoise = PNG.generateNoiseMap(x, y, step, PNG.generateVectorMap(x, y, step));
+        BackedLayer = FinalNoise;
+
         FinalNoise = GenerateFractalMap(FinalNoise, force, detailsLvl);
         FinalNoise = PNG.fixOverLimits(FinalNoise);
 
@@ -216,4 +210,28 @@ public class Board extends JComponent {
     }
 
 
+    public void prepareMap(){
+
+
+        long before = System.nanoTime();
+
+
+
+        short[][] currentMap = BackedLayer; // Start with base map
+
+
+        for (int l = 0; l < detailsLvl; l++) {
+            currentMap = PNG.addMap(currentMap, noiseLayers.get(l), matrixStrength[l] * force);
+        }
+
+        FinalNoise = currentMap;
+
+        FinalNoise = PNG.fixOverLimits(FinalNoise);
+
+        FinalNoise = PNG.islandficate(x, y, bevel, FinalNoise);
+        FinalNoise = PNG.fixOverLimits(FinalNoise);
+
+        float SecPerFrame = (System.nanoTime() - before)/1000000000f;
+        System.out.println("Current FPS ~ " + (int) (1/SecPerFrame));
+    }
 }

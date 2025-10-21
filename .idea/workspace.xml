@@ -5,25 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7502fb20-088c-4cb8-9bfc-12d58fa675b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/BrushParametersUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/BrushSelectorUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/BrushTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Brush.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BrushLayerHandeler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BrushLayerHandeler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BrushesUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ColorNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ColorNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ColorNodeUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ColorNodeUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ColorRampUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/ColorRampUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MapsForceUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NodeEditorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/NodeEditorUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PerlinNoiseGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/generator/PerlinNoiseGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/StringToSeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/generator/StringToSeed.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/colorRamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/colorRamp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vector2D.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/NodeEditorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/NodeEditorUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

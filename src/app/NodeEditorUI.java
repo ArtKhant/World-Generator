@@ -125,15 +125,15 @@ public class NodeEditorUI extends JComponent {
             g2d.fillOval( selectedColorX-5, selectedColorY-5, 10, 10);
 
             //brightness gradient column
-            for (int i = 0; i < 50; i++){
+            for (int i = 0; i < 100; i++){
 
-                int gradColor = (int) (255 * (2*i) / 100f);
+                int gradColor = (int) (255 * (i) / 100f);
                 g2d.setColor(new Color(gradColor, gradColor, gradColor));
 
-                if(Math.abs(brightness - 2*i/100f) < 0.01){
-                    selectedColorY = 2*i;
+                if(Math.abs(brightness - i/100f) < 0.01){
+                    selectedColorY = i;
                 }
-                g2d.fillRect(135 , 2+i*2, 15, 2);
+                g2d.fillRect(135 , i, 15, 1);
 
             }
 
@@ -147,19 +147,19 @@ public class NodeEditorUI extends JComponent {
 
 
             //Color columns
-            for (int i = 0; i < 50; i++){
+            for (int i = 0; i < 100; i++){
 
-                int colorVal = (int) (255*i/100f*2);
+                int colorVal = (int) (255*i/100f);
 
                 //color sliders
                 g2d.setColor(new Color(colorVal,0 , 0));
-                g2d.fillRect(165+i*2 , 2, 2, 20);
+                g2d.fillRect(165+i , 2, 1, 20);
 
                 g2d.setColor(new Color(0,colorVal , 0));
-                g2d.fillRect(165+i*2 , 42, 2, 20);
+                g2d.fillRect(165+i , 42, 1, 20);
 
                 g2d.setColor(new Color(0,0 , colorVal));
-                g2d.fillRect(165+i*2 , 82, 2, 20);
+                g2d.fillRect(165+i , 82, 1, 20);
 
 
 

@@ -11,9 +11,12 @@ public class Window {
     public Window(){
 
         frame = new JFrame();
-        frame.setSize(1900, 980);
+        frame.setSize(1900, 1800);
         //frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         frame.setVisible(true);
         frame.getContentPane().setBackground(new Color(53,62,67));
         frame.setTitle("World Map Generator");
@@ -71,7 +74,7 @@ public class Window {
 
         DetailsStrengh.addChangeListener(e -> {
             board.setDetailsStrengh(DetailsStrengh.getValue());
-            board.generateTerrain();
+            board.prepareMap();
             board.repaint();
         });
 
@@ -90,7 +93,7 @@ public class Window {
 
             board.setDetailsStrengh(newValue);
 
-            board.generateTerrain();
+            board.prepareMap();
             board.repaint();
 
         });
