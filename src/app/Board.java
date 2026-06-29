@@ -79,7 +79,7 @@ public class Board extends JComponent {
 
             ramp.addNewNode(new Color(0, 0, 0), 0);
             ramp.addNewNode(new Color(10, 50, 90), 500);
-            ramp.addNewNode(new Color(30, 110, 160), 600);
+            ramp.addNewNode(new Color(30, 110, 160), 610);
             ramp.addNewNode(new Color(170, 160, 20), 620);
             ramp.addNewNode(new Color(100, 150, 20), 625);
             ramp.addNewNode(new Color(80, 120, 30), 725);
@@ -91,17 +91,14 @@ public class Board extends JComponent {
     }
 
     private short[][] GenerateFractalMap(short[][] map, int force, int depth){
-        
 
         int totalLayers = detailsLvl;
-
 
         int[] matrixStep = new int[totalLayers];
         matrixStrength = new double[totalLayers];
 
         List<float[][][]> vectorMaps = new ArrayList<>();
         noiseLayers = new ArrayList<>();
-        long before = System.nanoTime();
 
         for(int i = step/2, amountOfLayers = 0; i > 2 && amountOfLayers < totalLayers; i--){
 
@@ -117,10 +114,6 @@ public class Board extends JComponent {
 
         }
 
-
-        System.out.println("Time on vector maps milliseconds ~ " + (System.nanoTime() - before)/1000000f);
-
-        before = System.nanoTime();
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
         List<Future<short[][]>> futures = new ArrayList<>();
@@ -146,17 +139,13 @@ public class Board extends JComponent {
             }
         }
 
-        System.out.println("Time on noise maps milliseconds ~ " + (System.nanoTime() - before)/1000000f);
-        Runtime.getRuntime().gc();
-        before = System.nanoTime();
-
         short[][] currentMap = map; // Start with base map
         for (int l = 0; l < totalLayers; l++) {
             noiseLayers.add(l, allLayers.get(l));
             currentMap = PNG.addMap(currentMap, allLayers.get(l), matrixStrength[l] * force);
         }
         map = currentMap;
-        System.out.println("Time on sum maps milliseconds ~ " + (System.nanoTime() - before)/1000000f);
+
 
         allLayers.clear();
         allLayers = null; // Remove reference
@@ -164,16 +153,12 @@ public class Board extends JComponent {
         vectorMaps = null;
         matrixStep = null;
 
-
-
-
         return map;
     }
 
     public void generateTerrain(){
         PNG = new PerlinNoiseGenerator(seed);
 
-        long before = System.nanoTime();
 
         FinalNoise = PNG.generateNoiseMap(x, y, step, PNG.generateVectorMap(x, y, step));
         BackedLayer = FinalNoise;
@@ -181,11 +166,9 @@ public class Board extends JComponent {
         FinalNoise = GenerateFractalMap(FinalNoise, force, detailsLvl);
         FinalNoise = PNG.fixOverLimits(FinalNoise);
 
-        FinalNoise = PNG.islandficate(x, y, bevel, FinalNoise);
+        FinalNoise = PNG.islandify(x, y, bevel, FinalNoise);
         FinalNoise = PNG.fixOverLimits(FinalNoise);
 
-        float SecPerFrame = (System.nanoTime() - before)/1000000000f;
-        System.out.println("Current FPS ~ " + (int) (1/SecPerFrame));
 
     }
 
@@ -207,31 +190,5 @@ public class Board extends JComponent {
 
     public short[][] getFinalNoise() {
         return FinalNoise;
-    }
-
-
-    public void prepareMap(){
-
-
-        long before = System.nanoTime();
-
-
-
-        short[][] currentMap = BackedLayer; // Start with base map
-
-
-        for (int l = 0; l < detailsLvl; l++) {
-            currentMap = PNG.addMap(currentMap, noiseLayers.get(l), matrixStrength[l] * force);
-        }
-
-        FinalNoise = currentMap;
-
-        FinalNoise = PNG.fixOverLimits(FinalNoise);
-
-        FinalNoise = PNG.islandficate(x, y, bevel, FinalNoise);
-        FinalNoise = PNG.fixOverLimits(FinalNoise);
-
-        float SecPerFrame = (System.nanoTime() - before)/1000000000f;
-        System.out.println("Current FPS ~ " + (int) (1/SecPerFrame));
     }
 }

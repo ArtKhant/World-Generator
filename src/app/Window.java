@@ -21,7 +21,6 @@ public class Window {
         frame.getContentPane().setBackground(new Color(53,62,67));
         frame.setTitle("World Map Generator");
 
-
         loadInterface();
 
     }
@@ -40,7 +39,7 @@ public class Window {
         parameters.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         parameters.setPreferredSize(new Dimension(430, 900));
         parameters.setBackground(backgroundColor);
-        parameters.setLayout(new GridLayout(8, 1, 5, 15));
+        parameters.setLayout(new GridLayout(6, 1, 5, 15));
 
 
         frame.add(parameters, BorderLayout.EAST);
@@ -68,13 +67,13 @@ public class Window {
 
         JSlider DetailsStrengh = new JSlider();
 
-        DetailsStrengh.setMinimum(-30);
-        DetailsStrengh.setMaximum(30);
+        DetailsStrengh.setMinimum(-60);
+        DetailsStrengh.setMaximum(60);
         DetailsStrengh.setValue(10);
 
         DetailsStrengh.addChangeListener(e -> {
             board.setDetailsStrengh(DetailsStrengh.getValue());
-            board.prepareMap();
+            board.generateTerrain();
             board.repaint();
         });
 
@@ -93,7 +92,7 @@ public class Window {
 
             board.setDetailsStrengh(newValue);
 
-            board.prepareMap();
+            board.generateTerrain();
             board.repaint();
 
         });
@@ -125,6 +124,7 @@ public class Window {
         nodeEditorUI.setRampUI(rampUI);
         nodeEditorUI.setBoard(board);
 
+/*
         BrushSelectorUI brushSelection = new BrushSelectorUI();
 
         parameters.add(brushSelection);
@@ -134,6 +134,8 @@ public class Window {
 
         parameters.add(brushesUI);
 
+
+        */
         parameters.revalidate();
         parameters.repaint();
 

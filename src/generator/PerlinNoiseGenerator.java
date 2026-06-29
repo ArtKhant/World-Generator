@@ -8,14 +8,13 @@ import java.util.List;
 public class PerlinNoiseGenerator {
 
     private Random rnd;
-    private StringToSeed STS = new StringToSeed();
 
 
 
 
     public PerlinNoiseGenerator(String StringSeed){
         rnd = new Random();
-        rnd.setSeed(STS.convert(StringSeed));
+        rnd.setSeed(convert(StringSeed));
     }
 
     public float[][][] generateVectorMap(int X, int Y, int step){
@@ -163,18 +162,18 @@ public class PerlinNoiseGenerator {
             }
         }
 
-        for(int x = 0; x < map.length; x++){
-            for(int y = 0; y < map[0].length; y++) {
-                map[x][y] = (short)( (map[x][y] / max) * 500);
+        for(int x = 0; x < map.length; x++) {
+            for (int y = 0; y < map[0].length; y++) {
+                map[x][y] = (short) ((map[x][y] / max) * 500);
             }
         }
 
-//        System.out.println("time spended: " + (System.nanoTime() - before)/1000000 + "ms");
+
         return map;
     }
 
 
-    public short[][] islandficate (int x, int y, int bevel, short[][] highmap){
+    public short[][] islandify (int x, int y, int bevel, short[][] highmap){
 
 //        System.out.println("make in island shape");
 //        long before = System.nanoTime();
@@ -210,7 +209,16 @@ public class PerlinNoiseGenerator {
     }
 
 
+    private short convert(String seed){
 
+        short seedToVal = 0;
+
+        for(char ch : seed.toCharArray()){
+            seedToVal += (int) ch;
+        }
+        return seedToVal;
+
+    }
 
 }
 
