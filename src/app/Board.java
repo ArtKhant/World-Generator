@@ -87,6 +87,8 @@ public class Board extends JComponent {
             ramp.addNewNode(new Color(40, 35, 60), 810);
             ramp.addNewNode(new Color(60, 60, 90), 880);
             ramp.addNewNode(new Color(200, 200, 250), 1000);
+
+
         }
     }
 
@@ -148,10 +150,7 @@ public class Board extends JComponent {
 
 
         allLayers.clear();
-        allLayers = null; // Remove reference
         vectorMaps.clear();
-        vectorMaps = null;
-        matrixStep = null;
 
         return map;
     }

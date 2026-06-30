@@ -32,11 +32,22 @@ public class colorRamp {
     }
 
     public Color getColor(int index){
-
-        if (index >= ramp.size() || nodes.size() == 0) {
-
-            return Color.WHITE; // or throw a more descriptive exception
+        if (nodes.size() == 0) {
+            if(index%4<2){
+                return new Color(229,222,207);
+            }
+            return new Color(229,203,186);
         }
+
+        else if (index >= ramp.size() || nodes.size() == 0) {
+
+            return ramp.get(ramp.size()-1);
+        }
+        else if (index < 0) {
+
+            return ramp.get(0);
+        }
+
         return ramp.get(index);
     }
 

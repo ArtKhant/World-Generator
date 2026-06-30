@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="WorldGenerator">
+    <output-path>$PROJECT_DIR$/out/artifacts/WorldGenerator</output-path>
+    <root id="root">
+      <element id="archive" name="WorldGenerator.jar">
+        <element id="module-output" name="WorldGenerator" />
+      </element>
+    </root>
+  </artifact>
+</component>

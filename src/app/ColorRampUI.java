@@ -178,7 +178,7 @@ public class ColorRampUI extends JComponent {
         for(int i = 0; i < 200; i++){
 
             g2d.setColor(ramp.getColor(i*5));
-            g2d.fillRect(i*2, 0, 2, 50);
+            g2d.fillRect(i*2, 0, 3, 50);
         }
 
         for (ColorNode node : ramp.getNodes()){

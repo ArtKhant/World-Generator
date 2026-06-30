@@ -11,11 +11,12 @@ public class Window {
     public Window(){
 
         frame = new JFrame();
-        frame.setSize(1900, 1800);
+        //frame.setSize(1920, 1080);
+
         //frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         frame.setVisible(true);
         frame.getContentPane().setBackground(new Color(53,62,67));
@@ -67,8 +68,8 @@ public class Window {
 
         JSlider DetailsStrengh = new JSlider();
 
-        DetailsStrengh.setMinimum(-60);
-        DetailsStrengh.setMaximum(60);
+        DetailsStrengh.setMinimum(-40);
+        DetailsStrengh.setMaximum(40);
         DetailsStrengh.setValue(10);
 
         DetailsStrengh.addChangeListener(e -> {
@@ -101,15 +102,6 @@ public class Window {
 
         parameters.add(DetailsStrengh);
 
-
-//        MapsForceUI MPFUI = new MapsForceUI();
-//
-//        parameters.add(MPFUI);
-
-
-
-
-
         ColorRampUI rampUI = new ColorRampUI();
         rampUI.setRamp(board.getColorRamp());
 
@@ -124,7 +116,7 @@ public class Window {
         nodeEditorUI.setRampUI(rampUI);
         nodeEditorUI.setBoard(board);
 
-/*
+        /*
         BrushSelectorUI brushSelection = new BrushSelectorUI();
 
         parameters.add(brushSelection);

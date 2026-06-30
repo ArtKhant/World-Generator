@@ -39,22 +39,14 @@ public class NodeEditorUI extends JComponent {
 
                 g2d.setColor(new Color(181+i, 166+i, 66+i));
                 g2d.drawOval(20+i , 2+i, 100-i*2, 100-i*2);
-
             }
 
-            for (int i = 0; i < 5; i++){
+            for (int i = 0; i < 15; i++){
 
-                g2d.setColor(new Color(181+i*3, 166+i*3, 66+i*3));
+                g2d.setColor(new Color(181+i, 166+i, 66+i));
 
-
-                g2d.drawRect(135+i*3 , 2, 1, 100);
-
-
-
+                g2d.drawRect(135+i, 2, 2, 100);
             }
-
-
-
 
 
             for (int i = 0; i < 20; i++){
@@ -62,14 +54,15 @@ public class NodeEditorUI extends JComponent {
                 g2d.setColor(new Color(181+i, 166+i, 66+i));
 
                 //hidden color sliders
-                g2d.drawRect(165 , 2+i, 100, 1);
-                g2d.drawRect(165 , 42+i, 100, 1);
-                g2d.drawRect(165 , 82+i, 100, 1);
+                g2d.drawRect(165 , 2+i, 100, 2);
+                g2d.drawRect(165 , 42+i, 100, 2);
+                g2d.drawRect(165 , 82+i, 100, 2);
 
                 //hidden color values
-                g2d.drawRect(275 , 2+i, 70, 1);
-                g2d.drawRect(275 , 42+i, 70, 1);
-                g2d.drawRect(275 , 82+i, 70, 1);
+                g2d.drawRect(275 , 2+i, 70, 2);
+                g2d.drawRect(275 , 42+i, 70, 2);
+                g2d.drawRect(275 , 82+i, 70, 2);
+
 
                 g2d.drawOval(350+i/2 , 2+i/2, 20-i, 20-i);
                 g2d.drawOval(350+i/2 , 42+i/2, 20-i, 20-i);
@@ -133,7 +126,7 @@ public class NodeEditorUI extends JComponent {
                 if(Math.abs(brightness - i/100f) < 0.01){
                     selectedColorY = i;
                 }
-                g2d.fillRect(135 , i, 15, 1);
+                g2d.fillRect(135 , i, 15, 2);
 
             }
 
@@ -153,13 +146,13 @@ public class NodeEditorUI extends JComponent {
 
                 //color sliders
                 g2d.setColor(new Color(colorVal,0 , 0));
-                g2d.fillRect(165+i , 2, 1, 20);
+                g2d.fillRect(165+i , 2, 2, 20);
 
                 g2d.setColor(new Color(0,colorVal , 0));
-                g2d.fillRect(165+i , 42, 1, 20);
+                g2d.fillRect(165+i , 42, 2, 20);
 
                 g2d.setColor(new Color(0,0 , colorVal));
-                g2d.fillRect(165+i , 82, 1, 20);
+                g2d.fillRect(165+i , 82, 2, 20);
 
 
 
